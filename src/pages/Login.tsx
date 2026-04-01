@@ -73,7 +73,7 @@ export default function Login() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   className="block w-full pl-10 pr-3 py-3 border border-white/10 rounded-md bg-darker text-ivory placeholder-ivory/30 focus:outline-none focus:ring-1 focus:ring-gold focus:border-gold sm:text-sm transition-colors"
-                  placeholder="admin@netkham.com"
+                  placeholder="Email"
                 />
               </div>
             </div>
@@ -90,7 +90,7 @@ export default function Login() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   className="block w-full pl-10 pr-3 py-3 border border-white/10 rounded-md bg-darker text-ivory placeholder-ivory/30 focus:outline-none focus:ring-1 focus:ring-gold focus:border-gold sm:text-sm transition-colors"
-                  placeholder="••••••••"
+                  placeholder="Mật khẩu"
                 />
               </div>
             </div>
