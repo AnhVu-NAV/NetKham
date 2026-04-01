@@ -126,11 +126,10 @@ export default function Login() {
           </form>
           
           <div className="mt-6 text-center text-sm text-ivory/60 bg-darker/50 p-4 rounded-lg border border-white/5">
-            <p className="mb-2 font-medium text-ivory/80">Tài khoản dùng thử:</p>
-            <div className="flex flex-col gap-1">
-              <p>Quản trị: <span className="text-gold font-mono">admin@netkham.com</span> / <span className="text-gold font-mono">admin</span></p>
-              <p>Khách hàng: <span className="text-gold font-mono">user@netkham.com</span> / <span className="text-gold font-mono">user</span></p>
-            </div>
+            <p className="mb-2 font-medium text-ivory/80">Bạn chưa có tài khoản?</p>
+            <Link to="/register" className="inline-block mt-2 px-6 py-2 border border-gold text-gold hover:bg-gold hover:text-darker transition-colors rounded-md font-medium uppercase tracking-wider text-xs">
+              Đăng ký tài khoản ngay
+            </Link>
           </div>
         </div>
       </div>

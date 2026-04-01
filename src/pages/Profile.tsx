@@ -61,16 +61,20 @@ export default function Profile() {
     if (storedUser) {
       const parsedUser = JSON.parse(storedUser);
       setUser(parsedUser);
-      fetchOrders(parsedUser.email);
+      fetchOrders(parsedUser.email, parsedUser.phone);
     } else {
       navigate('/login');
     }
   }, [navigate]);
 
-  const fetchOrders = async (email: string) => {
+  const fetchOrders = async (email: string, phone?: string) => {
     setLoadingOrders(true);
     try {
-      const response = await fetch(`/api/orders?email=${encodeURIComponent(email)}`);
+      let url = `/api/orders?email=${encodeURIComponent(email)}`;
+      if (phone) {
+        url += `&phone=${encodeURIComponent(phone)}`;
+      }
+      const response = await fetch(url);
       if (response.ok) {
         const data = await response.json();
         setOrders(data);

@@ -166,10 +166,14 @@ async function startServer() {
   // Get all orders
   app.get('/api/orders', async (req, res) => {
     try {
-      const { email } = req.query;
+      const { email, phone } = req.query;
       let result;
-      if (email) {
+      if (email && phone) {
+        result = await pool.query('SELECT * FROM orders WHERE email = $1 OR phone = $2 ORDER BY date DESC', [email, phone]);
+      } else if (email) {
         result = await pool.query('SELECT * FROM orders WHERE email = $1 ORDER BY date DESC', [email]);
+      } else if (phone) {
+        result = await pool.query('SELECT * FROM orders WHERE phone = $1 ORDER BY date DESC', [phone]);
       } else {
         result = await pool.query('SELECT * FROM orders ORDER BY date DESC');
       }

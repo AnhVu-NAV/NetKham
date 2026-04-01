@@ -9,6 +9,7 @@ export default function Register() {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
+    phone: '',
     password: '',
     confirmPassword: ''
   });
@@ -29,6 +30,7 @@ export default function Register() {
         body: JSON.stringify({
           name: formData.name,
           email: formData.email,
+          phone: formData.phone,
           password: formData.password
         }),
       });
@@ -102,6 +104,25 @@ export default function Register() {
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                   className="block w-full pl-10 pr-3 py-2 border border-white/10 rounded-lg bg-darker text-ivory placeholder-ivory/30 focus:outline-none focus:ring-1 focus:ring-gold focus:border-gold sm:text-sm transition-colors"
                   placeholder="you@example.com"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-ivory/80">
+                Số điện thoại
+              </label>
+              <div className="mt-1 relative rounded-md shadow-sm">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                  <span className="text-ivory/40 font-medium pl-1">📞</span>
+                </div>
+                <input
+                  type="tel"
+                  required
+                  value={formData.phone}
+                  onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                  className="block w-full pl-10 pr-3 py-2 border border-white/10 rounded-lg bg-darker text-ivory placeholder-ivory/30 focus:outline-none focus:ring-1 focus:ring-gold focus:border-gold sm:text-sm transition-colors"
+                  placeholder="0901234567"
                 />
               </div>
             </div>
