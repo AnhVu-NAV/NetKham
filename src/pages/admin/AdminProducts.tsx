@@ -18,6 +18,7 @@ export default function AdminProducts() {
     category: 'Trâm gương lược',
     price: '',
     image: 'https://images.unsplash.com/photo-1578301978693-85fa9c03fa37?q=80&w=800&auto=format&fit=crop',
+    images: '',
     description: '',
     material: '',
     isNew: false,
@@ -41,6 +42,7 @@ export default function AdminProducts() {
         category: product.category,
         price: product.price.toString(),
         image: product.image,
+        images: product.images ? product.images.join('\n') : product.image,
         description: product.description || '',
         material: product.material || '',
         isNew: product.isNew || false,
@@ -53,6 +55,7 @@ export default function AdminProducts() {
         category: 'Trâm gương lược',
         price: '',
         image: 'https://images.unsplash.com/photo-1578301978693-85fa9c03fa37?q=80&w=800&auto=format&fit=crop',
+        images: '',
         description: '',
         material: '',
         isNew: false,
@@ -83,6 +86,14 @@ export default function AdminProducts() {
     e.preventDefault();
     const priceNum = parseInt(formData.price.replace(/\D/g, ''), 10) || 0;
     
+    const imagesArray = formData.images
+      ? formData.images.split('\n').map(url => url.trim()).filter(url => url !== '')
+      : [formData.image];
+      
+    if (imagesArray.length === 0) {
+      imagesArray.push(formData.image);
+    }
+    
     try {
       if (editingProduct) {
         await updateProduct(editingProduct.id, { 
@@ -90,6 +101,7 @@ export default function AdminProducts() {
           category: formData.category, 
           price: priceNum, 
           image: formData.image,
+          images: imagesArray,
           description: formData.description,
           material: formData.material,
           isNew: formData.isNew,
@@ -103,7 +115,7 @@ export default function AdminProducts() {
           category: formData.category,
           price: priceNum,
           image: formData.image,
-          images: [formData.image],
+          images: imagesArray,
           description: formData.description || 'Mô tả sản phẩm mới...',
           material: formData.material || 'Gỗ, Xà cừ',
           isNew: formData.isNew,
@@ -230,8 +242,12 @@ export default function AdminProducts() {
                 <input required type="number" value={formData.price} onChange={e => setFormData({...formData, price: e.target.value})} className="w-full px-3 py-2 bg-dark border border-white/10 rounded-lg text-ivory focus:outline-none focus:border-gold" />
               </div>
               <div>
-                <label className="block text-sm font-medium text-ivory/80 mb-1">URL Hình ảnh</label>
+                <label className="block text-sm font-medium text-ivory/80 mb-1">URL Hình ảnh chính</label>
                 <input required type="url" value={formData.image} onChange={e => setFormData({...formData, image: e.target.value})} className="w-full px-3 py-2 bg-dark border border-white/10 rounded-lg text-ivory focus:outline-none focus:border-gold" />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-ivory/80 mb-1">URL Hình ảnh phụ (Mỗi link 1 dòng)</label>
+                <textarea rows={3} value={formData.images} onChange={e => setFormData({...formData, images: e.target.value})} className="w-full px-3 py-2 bg-dark border border-white/10 rounded-lg text-ivory focus:outline-none focus:border-gold resize-none" placeholder="https://..." />
               </div>
               <div>
                 <label className="block text-sm font-medium text-ivory/80 mb-1">Mô tả</label>
